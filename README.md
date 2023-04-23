@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+Name - Md Shoaib Raza
+Regn_No - 12017811
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Answer1 - 
 
-In the project directory, you can run:
+List is a React component used for an interactive UI design to display items in a more readable form placing them vertically / horizontally.
+Here the component WrappedListComponent maps the item and create a SingleListItem and passes these props  :-
 
-### `npm start`
+ 'onClickHandler' -- function that handle the click functionality and change the background color of the text from red to green
+ 'text' -- it is the content that is to be set for the list to be displayed
+ 'index' -- it is the position of the item and it is being used by the onClickHandler function to find which text need to be colored
+ 'isSelected' .-- used to set the state and make null to clear the selection and make the background color to red
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Here memo is used to improve the performance by skipping the rendering of a component if the props have not changed.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Answer 2 -
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This code is having several error in it which needs to be addressed for the proper functioning of it.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Propblem-1 : In the SingleListItem onClickHandler={() => handleClick(index)} is having the error. It is not called with any argument
+correction : Repalce that line with  onClickHandler={(event) => onClickHandler(index)} 
+-----------------------------------OR----------------------------------either of the things can be done------------------------
+Problem-2 :  The ‘onClickHandler’ prop is not being passed correctly in the ‘SingleListItem’ component,
+Correction : It should be ‘onClick={onClickHandler}’ 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Problem-3 : In the ‘SingleListItem’ component, the ‘isSelected’ prop is having the error, it should have boolean value but object of was passed of useState hook .
+Correction : It should be ‘isSelected={selectedIndex === index},   this ===(triple sign) comparison will returns boolean value.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Problem-4 : In the ‘WrappedListComponent’ component, the ‘PropTypes.array’ declaration for ‘items’ should be ‘PropTypes.arrayOf’ instead and 'shapeOf' should be changed to shape().
+Correction : It should be ‘PropTypes.arrayOf(PropTypes.shape({ text: PropTypes.string.isRequired }))’.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Problem-5 : In the ‘WrappedListComponent’ component, the ‘useState’ hook is not being initialize with a default value The first argument to ‘useState’ should be the initial state value, and the second argument should be the state updater function.
+Correction : It should be ‘const [selectedIndex, setSelectedIndex] = useState(null);’ null value is the initial value .
